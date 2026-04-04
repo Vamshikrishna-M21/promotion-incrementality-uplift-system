@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "promotion-incrementality-uplift-system"
+version = "0.1.0"
+description = "Promotion incrementality and uplift decision system built on randomized treatment-control data."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+  "matplotlib>=3.10.0",
+  "numpy>=2.4.0",
+  "pandas>=3.0.0",
+  "pyyaml>=6.0.0",
+  "scikit-learn>=1.8.0",
+  "scipy>=1.17.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=9.0.0"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
