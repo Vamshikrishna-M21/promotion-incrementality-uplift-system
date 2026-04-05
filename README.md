@@ -1,58 +1,46 @@
 # Promotion Incrementality and Uplift Decision System
 
-This project builds a promotion targeting system around randomized treatment/control data, with an explicit focus on incrementality, heterogeneous treatment effects, and budgeted decision-making.
+This project builds an end-to-end causal targeting pipeline for promotions using randomized treatment/control data. Instead of predicting who is likely to convert, the system estimates who is likely to convert **because of treatment**, then turns those estimates into budget-aware targeting decisions.
 
-The leading dataset choice was the **Criteo Uplift Prediction Dataset**, and it ended up being the right anchor for the repo:
+The project covers the full decision workflow:
 
-- It is a true randomized incrementality benchmark, not just a response prediction table.
-- It is large enough to support serious uplift model comparison.
-- It supports ATE estimation, uplift modeling, treatment targeting, and offline policy evaluation.
-- It does **not** support Difference-in-Differences, Synthetic Control, or SDID because it is not a panel or time-series identification setting.
+- estimate average treatment effect from a randomized experiment
+- model heterogeneous treatment effects with uplift methods
+- rank users by predicted incremental impact
+- evaluate targeting policies under budget and ROI constraints
+- compare uplift targeting against naive business baselines
 
-## Dataset Choice and Tradeoffs
+## Dataset
 
-### Selected: Criteo Uplift Prediction Dataset
+This project uses the **Criteo Uplift Prediction Dataset**, a public randomized treatment/control benchmark for uplift modeling and promotion targeting.
 
-Why it won:
+Why this dataset is a strong fit:
 
-- Real randomized treatment/control structure.
-- Public benchmark used in uplift modeling research.
-- Large sample with enough signal to compare targeting policies.
-- Directly aligned with the business question: who should receive treatment?
+- It supports clean average treatment effect estimation because treatment assignment is randomized.
+- It is built for uplift modeling, so the core task is causal targeting rather than standard response prediction.
+- It is large enough to support meaningful model comparison and policy evaluation.
+- It matches the business question directly: which users should receive treatment to maximize incremental value?
 
-Tradeoffs:
+Practical considerations:
 
-- Features are anonymized, so interpretation is weaker than in a CRM dataset.
-- The public file is large, so the pipeline builds a reproducible random sample for laptop-friendly runs.
-- There is no temporal panel structure, so panel causal estimators are out of scope on methodological grounds.
+- The features are anonymized, so the project emphasizes decision quality and causal evaluation more than feature interpretation.
+- The public dataset is large, so the pipeline creates a reproducible random sample for faster local experimentation.
+- The data does not have panel or time-series structure, so methods like Difference-in-Differences, Synthetic Control, and SDID are intentionally excluded.
 
-### Runner-up: Hillstrom E-Mail Challenge
+## Methodology
 
-Why it was not the primary choice:
+The pipeline is organized in the same order a production decisioning workflow would be built.
 
-- It is intuitive and easier to explain.
-- It is much smaller and less benchmark-grade for a flagship causal ML repo.
-- It is useful as a teaching dataset, but weaker as the main project backbone if the goal is a stronger GitHub portfolio piece.
-
-## What the System Does
-
-The pipeline is organized in the same order a real decisioning team would tackle the problem:
-
-1. Estimate **average treatment effects** from randomized data.
-2. Fit **uplift / HTE models** to estimate who benefits from treatment.
-3. Rank users by predicted incremental effect.
-4. Evaluate **budget-constrained targeting policies** with inverse-propensity policy value estimates.
-5. Compare uplift-based targeting against **naive response targeting**, **random targeting**, **treat-all**, and **treat-none** baselines.
-
-## Current Methods
-
-- Randomized experiment analysis with difference-in-means ATE estimates and confidence intervals.
-- Uplift modeling with:
-  - two-model logistic regression
-  - two-model gradient boosting
-  - interaction logistic regression
-- Model selection using uplift curves, AUUC, and Qini on a validation split.
-- ROI-aware policy evaluation using conversion value and treatment cost assumptions under budget limits.
+1. **Randomized experiment analysis**
+   Estimate average treatment effects with difference-in-means, confidence intervals, and significance tests.
+2. **Uplift / HTE modeling**
+   Train user-level treatment effect models with two-model logistic regression, two-model gradient boosting, and interaction logistic regression.
+3. **Model selection**
+   Choose the best uplift model on a validation split using uplift curves, AUUC, and Qini.
+4. **Policy evaluation**
+   Convert uplift scores into budgeted targeting policies and estimate offline policy value with inverse-propensity weighting.
+5. **Business comparison**
+   Compare uplift targeting against naive response targeting, random targeting, treat-all, and treat-none baselines.
 
 ## Repo Layout
 
@@ -87,24 +75,24 @@ The default run downloads the public Criteo file, builds a random sample of abou
 
 ## Main Results From the Current Run
 
-Dataset run:
+Run summary:
 
 - Random sample size: **299,421**
 - Treatment propensity in the test split: **0.8481**
 - Best uplift model by validation AUUC: **two_model_logistic**
 
-Randomized experiment results on the holdout set:
+Holdout experiment results:
 
 - **Conversion ATE:** `+0.001512` absolute lift, 95% CI `[0.000575, 0.002450]`, `p=0.00157`
 - **Visit ATE:** `+0.012007` absolute lift, 95% CI `[0.007783, 0.016231]`, `p=2.52e-08`
 
-Model ranking on validation AUUC:
+Validation uplift ranking:
 
 - `two_model_logistic`: `0.001250`
 - `interaction_logistic`: `0.001002`
 - `two_model_gbdt`: `0.000990`
 
-Policy takeaways with `conversion_value=100` and `treatment_cost=1`:
+Targeting takeaways with `conversion_value=100` and `treatment_cost=1`:
 
 - Uplift targeting beats random and treat-all at tight budgets.
 - At a **5% budget**, uplift targeting produces positive incremental value per eligible user (`0.0445`), slightly ahead of naive response targeting (`0.0414`).
