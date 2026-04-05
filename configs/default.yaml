@@ -1,0 +1,49 @@
+dataset:
+  name: criteo_uplift
+  url: https://huggingface.co/datasets/criteo/criteo-uplift/resolve/main/criteo-research-uplift-v2.1.csv.gz
+  raw_path: data/raw/criteo-research-uplift-v2.1.csv.gz
+  processed_dir: data/processed/criteo_sample_300k
+  total_rows_hint: 13979592
+  sample_size: 300000
+  chunk_size: 250000
+  random_seed: 42
+
+modeling:
+  outcome: conversion
+  visit_outcome: visit
+  features:
+    - f0
+    - f1
+    - f2
+    - f3
+    - f4
+    - f5
+    - f6
+    - f7
+    - f8
+    - f9
+    - f10
+    - f11
+  treatment_col: treatment
+  candidate_models:
+    - two_model_logistic
+    - two_model_gbdt
+    - interaction_logistic
+
+policy:
+  budgets:
+    - 0.05
+    - 0.10
+    - 0.15
+    - 0.20
+    - 0.30
+    - 0.40
+    - 0.50
+    - 0.75
+    - 1.00
+  conversion_value: 100.0
+  treatment_cost: 1.0
+
+reporting:
+  output_dir: reports
+  bootstrap_iterations: 300
