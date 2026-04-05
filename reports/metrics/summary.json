@@ -1,0 +1,276 @@
+{
+  "config_path": "configs/default.yaml",
+  "sample_size": 299421,
+  "propensity": 0.8481255740168656,
+  "best_model": "two_model_logistic",
+  "ate_summary": [
+    {
+      "outcome": "conversion",
+      "control_rate": 0.0015393073117097307,
+      "treatment_rate": 0.00305178184682024,
+      "ate": 0.0015124745351105095,
+      "relative_lift": 0.9825682783450059,
+      "standard_error": 0.0004784245210325326,
+      "z_stat": 3.1613649982787195,
+      "p_value": 0.0015703159096593922,
+      "ci_low": 0.0005747624738867456,
+      "ci_high": 0.0024501865963342732
+    },
+    {
+      "outcome": "visit",
+      "control_rate": 0.0354040681693238,
+      "treatment_rate": 0.04741090765898799,
+      "ate": 0.01200683948966419,
+      "relative_lift": 0.3391372831009187,
+      "standard_error": 0.0021550153659880143,
+      "z_stat": 5.57157952521577,
+      "p_value": 2.524400866121823e-08,
+      "ci_low": 0.007783009372327681,
+      "ci_high": 0.016230669607000696
+    }
+  ],
+  "model_leaderboard": [
+    {
+      "model": "two_model_logistic",
+      "auuc": 0.001249612666406155,
+      "qini": 0.000539141918827418
+    },
+    {
+      "model": "interaction_logistic",
+      "auuc": 0.001001538279455012,
+      "qini": 0.0002910675318762752
+    },
+    {
+      "model": "two_model_gbdt",
+      "auuc": 0.0009901871585821865,
+      "qini": 0.00027971641100344943
+    }
+  ],
+  "policy_results": [
+    {
+      "policy": "uplift_best",
+      "budget": 0.05,
+      "incremental_value_per_user": 0.04448607206905808
+    },
+    {
+      "policy": "naive_response",
+      "budget": 0.05,
+      "incremental_value_per_user": 0.0413665858988703
+    },
+    {
+      "policy": "random",
+      "budget": 0.05,
+      "incremental_value_per_user": -0.04917752847391874
+    },
+    {
+      "policy": "treat_none",
+      "budget": 0.05,
+      "incremental_value_per_user": 0.0
+    },
+    {
+      "policy": "treat_all",
+      "budget": 0.05,
+      "incremental_value_per_user": -0.848752546488949
+    },
+    {
+      "policy": "uplift_best",
+      "budget": 0.1,
+      "incremental_value_per_user": 0.008272487335714982
+    },
+    {
+      "policy": "naive_response",
+      "budget": 0.1,
+      "incremental_value_per_user": 0.0130285672218375
+    },
+    {
+      "policy": "random",
+      "budget": 0.1,
+      "incremental_value_per_user": -0.07751554715095153
+    },
+    {
+      "policy": "treat_none",
+      "budget": 0.1,
+      "incremental_value_per_user": 0.0
+    },
+    {
+      "policy": "treat_all",
+      "budget": 0.1,
+      "incremental_value_per_user": -0.848752546488949
+    },
+    {
+      "policy": "uplift_best",
+      "budget": 0.15,
+      "incremental_value_per_user": -0.04681171568043649
+    },
+    {
+      "policy": "naive_response",
+      "budget": 0.15,
+      "incremental_value_per_user": -0.028273395195770944
+    },
+    {
+      "policy": "random",
+      "budget": 0.15,
+      "incremental_value_per_user": -0.09485851360148627
+    },
+    {
+      "policy": "treat_none",
+      "budget": 0.15,
+      "incremental_value_per_user": 0.0
+    },
+    {
+      "policy": "treat_all",
+      "budget": 0.15,
+      "incremental_value_per_user": -0.848752546488949
+    },
+    {
+      "policy": "uplift_best",
+      "budget": 0.2,
+      "incremental_value_per_user": -0.09091756514254541
+    },
+    {
+      "policy": "naive_response",
+      "budget": 0.2,
+      "incremental_value_per_user": -0.07237924465787987
+    },
+    {
+      "policy": "random",
+      "budget": 0.2,
+      "incremental_value_per_user": -0.1680117367149343
+    },
+    {
+      "policy": "treat_none",
+      "budget": 0.2,
+      "incremental_value_per_user": 0.0
+    },
+    {
+      "policy": "treat_all",
+      "budget": 0.2,
+      "incremental_value_per_user": -0.848752546488949
+    },
+    {
+      "policy": "uplift_best",
+      "budget": 0.3,
+      "incremental_value_per_user": -0.18303364975000733
+    },
+    {
+      "policy": "naive_response",
+      "budget": 0.3,
+      "incremental_value_per_user": -0.16646422077941941
+    },
+    {
+      "policy": "random",
+      "budget": 0.3,
+      "incremental_value_per_user": -0.25061566155015114
+    },
+    {
+      "policy": "treat_none",
+      "budget": 0.3,
+      "incremental_value_per_user": 0.0
+    },
+    {
+      "policy": "treat_all",
+      "budget": 0.3,
+      "incremental_value_per_user": -0.848752546488949
+    },
+    {
+      "policy": "uplift_best",
+      "budget": 0.4,
+      "incremental_value_per_user": -0.2830419990862351
+    },
+    {
+      "policy": "naive_response",
+      "budget": 0.4,
+      "incremental_value_per_user": -0.26253478708749195
+    },
+    {
+      "policy": "random",
+      "budget": 0.4,
+      "incremental_value_per_user": -0.3128827743207622
+    },
+    {
+      "policy": "treat_none",
+      "budget": 0.4,
+      "incremental_value_per_user": 0.0
+    },
+    {
+      "policy": "treat_all",
+      "budget": 0.4,
+      "incremental_value_per_user": -0.848752546488949
+    },
+    {
+      "policy": "uplift_best",
+      "budget": 0.5,
+      "incremental_value_per_user": -0.3810647582359298
+    },
+    {
+      "policy": "naive_response",
+      "budget": 0.5,
+      "incremental_value_per_user": -0.3585886547231091
+    },
+    {
+      "policy": "random",
+      "budget": 0.5,
+      "incremental_value_per_user": -0.398273887528024
+    },
+    {
+      "policy": "treat_none",
+      "budget": 0.5,
+      "incremental_value_per_user": 0.0
+    },
+    {
+      "policy": "treat_all",
+      "budget": 0.5,
+      "incremental_value_per_user": -0.848752546488949
+    },
+    {
+      "policy": "uplift_best",
+      "budget": 0.75,
+      "incremental_value_per_user": -0.617278342969273
+    },
+    {
+      "policy": "naive_response",
+      "budget": 0.75,
+      "incremental_value_per_user": -0.6046466970268402
+    },
+    {
+      "policy": "random",
+      "budget": 0.75,
+      "incremental_value_per_user": -0.6315465826276405
+    },
+    {
+      "policy": "treat_none",
+      "budget": 0.75,
+      "incremental_value_per_user": 0.0
+    },
+    {
+      "policy": "treat_all",
+      "budget": 0.75,
+      "incremental_value_per_user": -0.848752546488949
+    },
+    {
+      "policy": "uplift_best",
+      "budget": 1.0,
+      "incremental_value_per_user": -0.848752546488949
+    },
+    {
+      "policy": "naive_response",
+      "budget": 1.0,
+      "incremental_value_per_user": -0.848752546488949
+    },
+    {
+      "policy": "random",
+      "budget": 1.0,
+      "incremental_value_per_user": -0.848752546488949
+    },
+    {
+      "policy": "treat_none",
+      "budget": 1.0,
+      "incremental_value_per_user": 0.0
+    },
+    {
+      "policy": "treat_all",
+      "budget": 1.0,
+      "incremental_value_per_user": -0.848752546488949
+    }
+  ]
+}
